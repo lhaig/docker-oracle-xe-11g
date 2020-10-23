@@ -1,0 +1,50 @@
+# Job
+job:
+  datacenters:
+    - 'eu-west-2a'
+    - 'eu-west-2b'
+    - 'eu-west-2c'
+    - 'dc1'
+  region: "global"
+  type: "service"
+# Group
+group:
+  count: 1
+
+# Task
+# Docker
+config:
+  image: "oracleinanutshell/oracle-xe-11g"
+  port_map:
+    db: "1521"
+    http: "5500"
+    apex: "8080"
+
+# Resources
+resources:
+  cpu: 1000
+  memory: 1024
+  network:
+      mbits: 10
+  port:
+    db: "1521"
+    http: "5500"
+    apex: "8080"    
+
+# Docker Enviroment Variables
+env:
+  - ' "ORACLE_ALLOW_REMOTE" = true '
+
+# Docker Enviroment Variables
+logs:
+  max_files: 5
+  max_file_size: 15
+
+# Service
+service:
+  name: "oracle-xe-11g"
+  port: "apex"
+  tags:
+    - "oracle"
+    - "global"
+    - "11g"
